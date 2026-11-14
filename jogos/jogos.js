@@ -60,8 +60,7 @@ export function checkBroke(el) {
     showMessage(el, '💸 Sem saldo! Mas relaxa, clique aqui para resetar! 💸', 'lose');
     el.style.cursor = 'pointer';
     el.onclick = () => {
-        saldo.valor = SALDO_INICIAL;
-        updateBalance();
+        resetarSaldo();
         showMessage(el, '💰 Saldo resetado! Os astros te dão mais uma chance 💰');
     };
 }
@@ -80,6 +79,16 @@ export function createBetControl({ input, decrease, increase, onChange }) {
     set(state.value);
     return state;
 }
+
+// Volta o saldo para o inicial e avisa os jogos (a roleta, por exemplo, limpa as fichas da mesa)
+export function resetarSaldo() {
+    saldo.valor = SALDO_INICIAL;
+    window.dispatchEvent(new CustomEvent('croebet:saldo-resetado'));
+    updateBalance();
+}
+
+// Botão "↺ resetar" do topo, presente em todas as páginas
+document.getElementById('resetSaldo')?.addEventListener('click', resetarSaldo);
 
 // Mostra o saldo salvo assim que a página abre (também no hub, que não tem jogo)
 updateBalance();

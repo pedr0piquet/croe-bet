@@ -1,5 +1,6 @@
 // Estado do jogo
-let balance = 1000;
+// Saldo compartilhado com os outros jogos (salvo no navegador por jogos.js)
+import { saldo, SALDO_INICIAL, updateBalance as salvarSaldo, onBalanceChange } from './jogos.js';
 let betAmount = 10;
 let isSpinning = false;
 
@@ -15,7 +16,6 @@ const symbols = [
 ];
 
 // Elementos DOM
-const balanceElement = document.getElementById('balance');
 const betAmountInput = document.getElementById('betAmount');
 const spinBtn = document.getElementById('spinBtn');
 const spinPriceElement = document.getElementById('spinPrice');
@@ -36,14 +36,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('increaseBet').addEventListener('click', () => adjustBet(10));
     document.getElementById('decreaseBet').addEventListener('click', () => adjustBet(-10));
     betAmountInput.addEventListener('change', handleBetInputChange);
+
+    // Saldo mudou por fora (ex.: botão de resetar no topo): reativa o botão de girar
+    onBalanceChange(() => {
+        if (isSpinning) return;
+        spinBtn.disabled = saldo.valor < betAmount;
+        if (!spinBtn.disabled && resultMessage.classList.contains('lose') && resultMessage.onclick) {
+            resultMessage.textContent = '';
+            resultMessage.className = 'result-message';
+            resultMessage.style.cursor = 'default';
+            resultMessage.onclick = null;
+        }
+    });
 });
 
 // Atualizar display do saldo
 function updateBalance() {
-    balanceElement.textContent = `R$ ${balance.toFixed(2)}`;
+    salvarSaldo(); // atualiza o topo e salva o saldo compartilhado
 
     // Desabilitar botão se não tiver saldo suficiente
-    if (balance < betAmount) {
+    if (saldo.valor < betAmount) {
         spinBtn.disabled = true;
         resultMessage.textContent = '❌ Saldo insuficiente! (Mas é tudo de mentirinha mesmo 😄)';
         resultMessage.className = 'result-message lose';
@@ -55,7 +67,7 @@ function updateBalance() {
 // Ajustar aposta
 function adjustBet(change) {
     const newBet = betAmount + change;
-    if (newBet >= 1 && newBet <= Math.min(1000, balance)) {
+    if (newBet >= 1 && newBet <= Math.min(1000, saldo.valor)) {
         betAmount = newBet;
         betAmountInput.value = betAmount;
         updateBetDisplay();
@@ -65,7 +77,7 @@ function adjustBet(change) {
 // Lidar com mudança manual do input
 function handleBetInputChange(e) {
     let value = parseInt(e.target.value) || 1;
-    value = Math.max(1, Math.min(value, Math.min(1000, balance)));
+    value = Math.max(1, Math.min(value, Math.min(1000, saldo.valor)));
     betAmount = value;
     betAmountInput.value = betAmount;
     updateBetDisplay();
@@ -78,7 +90,7 @@ function updateBetDisplay() {
 
 // Função principal - Girar
 async function spin() {
-    if (isSpinning || balance < betAmount) return;
+    if (isSpinning || saldo.valor < betAmount) return;
 
     isSpinning = true;
     spinBtn.disabled = true;
@@ -86,7 +98,7 @@ async function spin() {
     resultMessage.className = 'result-message';
 
     // Deduzir aposta
-    balance -= betAmount;
+    saldo.valor -= betAmount;
     updateBalance();
 
     // Adicionar classe de spinning
@@ -123,7 +135,7 @@ async function spin() {
 
     if (winAmount > 0) {
         // Vitória!
-        balance += winAmount;
+        saldo.valor += winAmount;
         updateBalance();
 
         // Animação de vitória
@@ -167,7 +179,7 @@ async function spin() {
     isSpinning = false;
 
     // Verificar se acabou o saldo
-    if (balance === 0) {
+    if (saldo.valor < 1) {
         resultMessage.textContent = '💸 Sem saldo! Mas relaxa, clique aqui para resetar! 💸';
         resultMessage.className = 'result-message lose';
         resultMessage.style.cursor = 'pointer';
@@ -247,7 +259,7 @@ function checkWin(result) {
 
 // Resetar saldo
 function resetBalance() {
-    balance = 1000;
+    saldo.valor = SALDO_INICIAL;
     updateBalance();
     resultMessage.textContent = '💰 Saldo resetado! Boa sorte! 💰';
     resultMessage.className = 'result-message';
@@ -331,7 +343,7 @@ document.addEventListener('keydown', (e) => {
             break;
         case 'r':
         case 'R':
-            if (balance === 0) {
+            if (saldo.valor < 1) {
                 resetBalance();
             }
             break;

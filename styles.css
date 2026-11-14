@@ -109,6 +109,26 @@ header .container {
         2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
+.btn-reset-saldo {
+    display: block;
+    margin: 6px auto 0;
+    padding: 3px 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9em;
+    font-weight: 700;
+    color: #f0e6f0;
+    background: rgba(42, 10, 42, 0.8);
+    border: 1px solid #dda0dd;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-reset-saldo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(255, 105, 180, 0.7);
+}
+
 /* Hero Section místico */
 .hero {
     text-align: center;

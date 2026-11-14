@@ -40,7 +40,7 @@ Obrigado, Bruno e chat da Croezinha (e Franceline), por alimentarem o meme. 💜
 
 Os outros cards (Baralho Cigano, Runas do Endividamento, Astrologia do CLT etc.) continuam desativados na página inicial, esperando a fumaça baixar.
 
-O **saldo fictício** começa em R$ 1.000 e é compartilhado entre a Roleta, o Caça-Níqueis e a Bola de Cristal. Ele fica salvo no navegador (`localStorage`). Quando zera, clique na mensagem para resetar. O Jogo do Krepinho mantém o saldo próprio do original, que recomeça a cada visita.
+O **saldo fictício** começa em R$ 1.000 e é o mesmo em todos os jogos: ganhou na roleta, o dinheiro está lá no Krepinho. Ele fica salvo no navegador (`localStorage`). Para recomeçar, use o botão **↺ resetar saldo** no topo de qualquer página (ou clique na mensagem quando o saldo zerar).
 
 ---
 
@@ -100,7 +100,7 @@ Assim como o [original](https://github.com/bruno-fs/croebet), este projeto está
 - 🚫 **Sem fins comerciais**
 - 🔄 Distribuindo sob a mesma licença
 
-**Alterações em relação ao original:** o Jogo do Krepinho saiu de `index.html` para `jogos/krepinho.html` (com um link de volta ao hub); criação da Roleta, do Caça-Níqueis e da Bola de Cristal; página inicial transformada em hub de jogos; saldo compartilhado entre os jogos novos.
+**Alterações em relação ao original:** o Jogo do Krepinho saiu de `index.html` para `jogos/krepinho.html` (com um link de volta ao hub); criação da Roleta, do Caça-Níqueis e da Bola de Cristal; página inicial transformada em hub de jogos; saldo compartilhado entre todos os jogos (inclusive o Krepinho) com botão de resetar.
 
 Veja o arquivo [LICENSE](LICENSE).
 

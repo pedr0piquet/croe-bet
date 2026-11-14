@@ -281,6 +281,12 @@ const roleta = (() => {
     repeatBtn.addEventListener('click', repeatBets);
     // Saiu da página com fichas na mesa (sem girar)? Devolve pro saldo
     window.addEventListener('pagehide', () => { if (!isSpinning) clearBets(); });
+    // Saldo resetado: as fichas da mesa somem junto (sem devolver, o saldo já voltou ao inicial)
+    window.addEventListener('croebet:saldo-resetado', () => {
+        if (isSpinning) return;
+        bets = {};
+        renderChips();
+    });
     showMessage(message, '🪙 Clique na mesa pra colocar fichas (botão direito tira a ficha)');
 
     return { refresh };
