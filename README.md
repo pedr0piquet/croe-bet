@@ -33,13 +33,14 @@ Obrigado, Bruno e chat da Croezinha (e Franceline), por alimentarem o meme. 💜
 
 | Jogo | Página | Como funciona |
 |---|---|---|
+| 🔮 **Jogo do Krepinho** (original) | `krepinho.html` | O caça-níquel do Croebet original, mantido como era: 3 símbolos místicos iguais pagam até 10x. Atalhos: `Espaço`/`Enter` gira, `+`/`-` muda a aposta, `R` reseta o saldo. |
 | 🌙 **Roleta da Lua Cheia Trabalhista** | `roleta.html` | Roleta europeia (0 a 36). Clique na mesa para colocar fichas (botão direito tira). Número exato paga 36x, dúzia/coluna 3x, cor/par/metade 2x. Cada derrota leva um direito trabalhista. |
 | 🃏 **Caça-Níqueis de Tarô** | `caca-niqueis.html` | Grade 3x3 com 5 linhas (3 horizontais + 2 diagonais). Arcanos de A Roda da Fortuna (25x) até A Morte (1x). |
 | 🔮 **Bola de Cristal dos Direitos** | `bola-de-cristal.html` | 12 direitos escondidos na fumaça, com 1, 3, 5 ou 8 reformas no meio. Cada direito mantido aumenta o multiplicador; ache uma reforma e perde tudo. Saque quando quiser. |
 
 Os outros cards (Baralho Cigano, Runas do Endividamento, Astrologia do CLT etc.) continuam desativados na página inicial, esperando a fumaça baixar.
 
-O **saldo fictício** começa em R$ 1.000 e é compartilhado entre os jogos. Ele fica salvo no navegador (`localStorage`). Quando zera, clique na mensagem para resetar.
+O **saldo fictício** começa em R$ 1.000 e é compartilhado entre a Roleta, o Caça-Níqueis e a Bola de Cristal. Ele fica salvo no navegador (`localStorage`). Quando zera, clique na mensagem para resetar. O Jogo do Krepinho mantém o saldo próprio do original, que recomeça a cada visita.
 
 ---
 
@@ -61,6 +62,8 @@ O workflow em `.github/workflows/deploy.yml` faz o build com Vite e publica `dis
 
 ```
 index.html              # Salão dos Arcanos: cards de todos os jogos
+krepinho.html           # Jogo do Krepinho (página original do Croebet)
+script.js               # Lógica original do Jogo do Krepinho
 roleta.html / .js       # Roleta da Lua Cheia Trabalhista
 caca-niqueis.html / .js # Caça-Níqueis de Tarô
 bola-de-cristal.html / .js # Bola de Cristal dos Direitos
@@ -97,7 +100,7 @@ Assim como o [original](https://github.com/bruno-fs/croebet), este projeto está
 - 🚫 **Sem fins comerciais**
 - 🔄 Distribuindo sob a mesma licença
 
-**Alterações em relação ao original:** remoção do Jogo do Krepinho; criação da Roleta, do Caça-Níqueis e da Bola de Cristal; página inicial transformada em hub de jogos; saldo compartilhado entre páginas.
+**Alterações em relação ao original:** o Jogo do Krepinho saiu de `index.html` para `krepinho.html` (com um link de volta ao hub); criação da Roleta, do Caça-Níqueis e da Bola de Cristal; página inicial transformada em hub de jogos; saldo compartilhado entre os jogos novos.
 
 Veja o arquivo [LICENSE](LICENSE).
 
