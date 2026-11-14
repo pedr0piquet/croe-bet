@@ -182,7 +182,8 @@ function getSpinResult() {
     const result = [];
 
     // Probabilidade ajustada para ser "generoso" (é uma paródia, afinal)
-    const winChance = Math.random();
+    // Modo streamer (/streamer/): sempre cai nos 3 iguais, igual conta demo de influenciador
+    const winChance = document.documentElement.dataset.modo === 'streamer' ? 0 : Math.random();
 
     if (winChance < 0.15) {
         // 15% chance de ganhar com 3 iguais

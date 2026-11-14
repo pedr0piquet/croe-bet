@@ -1,4 +1,4 @@
-import { saldo, updateBalance, onBalanceChange, formatBRL, pick, sleep, showMessage, checkBroke, createBetControl } from './jogos.js';
+import { MODO_STREAMER, saldo, updateBalance, onBalanceChange, formatBRL, pick, sleep, showMessage, checkBroke, createBetControl } from './jogos.js';
 
 // ======================================================
 // 🔮 BOLA DE CRISTAL DOS DIREITOS
@@ -134,6 +134,15 @@ const bola = (() => {
 
     function revelar(i) {
         if (!emJogo || tiles[i].dataset.revelado) return;
+
+        // Modo streamer: se clicou numa reforma, ela "foge" para outro cartão ainda escondido
+        if (MODO_STREAMER && mapa[i]) {
+            const destino = tiles.findIndex((t, j) => !t.dataset.revelado && !mapa[j]);
+            if (destino >= 0) {
+                mapa[destino] = true;
+                mapa[i] = false;
+            }
+        }
 
         if (mapa[i]) {
             // Achou a reforma: perdeu tudo

@@ -1,4 +1,4 @@
-import { saldo, updateBalance, onBalanceChange, formatBRL, pick, sleep, showMessage, checkBroke, createBetControl } from './jogos.js';
+import { MODO_STREAMER, saldo, updateBalance, onBalanceChange, formatBRL, pick, sleep, showMessage, checkBroke, createBetControl } from './jogos.js';
 
 // ======================================================
 // 🃏 CAÇA-NÍQUEIS DE TARÔ (3x3, 5 linhas)
@@ -73,6 +73,19 @@ const slot = (() => {
 
     function sorteiaGrade() {
         const grade = [0, 1, 2].map(() => [0, 1, 2].map(() => sorteiaArcano()));
+
+        // Modo streamer: toda tirada tem pelo menos uma linha com arcano que paga 3x ou mais
+        if (MODO_STREAMER) {
+            const generosos = ARCANOS.filter((a) => a.mult >= 3);
+            const linhas = [...LINHAS].sort(() => Math.random() - 0.5);
+            const quantas = Math.random() < 0.35 ? 2 : 1;
+            linhas.slice(0, quantas).forEach((linha) => {
+                const arcano = pick(generosos);
+                linha.pos.forEach(([c, r]) => { grade[c][r] = arcano; });
+            });
+            return grade;
+        }
+
         // Igual ao Krepinho: um empurrãozinho "generoso" (é paródia, afinal)
         if (Math.random() < 0.12) {
             const linha = pick(LINHAS);

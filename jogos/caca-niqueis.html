@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CROEBET - Caça-Níqueis de Tarô 🃏</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="./jogos.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="../" class="logo-link">🔮 CROEBET</a></h1>
+                <span class="tagline">Um cassino bem lofi</span>
+            </div>
+            <div class="balance">
+                <div class="balance-label">Saldo Fictício:</div>
+                <div class="balance-amount" id="balance">R$ 1.000,00</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero hero-compact">
+            <p class="hero-subtitle">"Os arcanos giram... e a sua carteira também" 🃏</p>
+            <small>💸 O saldo fictício é o mesmo em todos os jogos do Croebet.</small>
+            <p class="back-link"><a href="../">← Voltar ao Salão dos Arcanos</a></p>
+        </section>
+
+        <section class="games">
+            <!-- ================= CAÇA-NÍQUEIS ================= -->
+            <div class="game-card featured" id="slot">
+                <div class="game-header">
+                    <h3>🃏 CAÇA-NÍQUEIS DE TARÔ</h3>
+                    <span class="hot-badge">✨ NOVO ✨</span>
+                </div>
+                <div class="game-description">
+                    <p>Gire os arcanos maiores e descubra se O Louco ou A Morte vão te abençoar com fortuna!</p>
+                    <p class="game-hint">5 linhas de pagamento: 3 horizontais e 2 diagonais. Cada linha paga sobre o valor da aposta.</p>
+                    <small class="game-joke">🔮 "Vejo... símbolos girando... e sua carteira vazia" - Cartomante do Slot</small>
+                </div>
+
+                <div class="slot-machine">
+                    <div class="slot-display slot-grid" id="slotGrid"></div>
+
+                    <div class="bet-controls">
+                        <label for="slotBet">Valor da Aposta:</label>
+                        <div class="bet-input-group">
+                            <button class="btn-bet-adjust" id="slotDecrease">-</button>
+                            <input type="number" class="bet-amount-input" id="slotBet" value="10" min="1" max="1000" step="10">
+                            <button class="btn-bet-adjust" id="slotIncrease">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-spin" id="slotSpin">
+                        <span class="btn-text">TIRAR AS CARTAS</span>
+                        <span class="btn-price">R$ <span id="slotPrice">10,00</span></span>
+                    </button>
+
+                    <div class="result-message" id="slotMessage"></div>
+                </div>
+
+                <div class="paytable">
+                    <h4>🃏 Tabela dos Arcanos (3 iguais na linha)</h4>
+                    <div id="slotPaytable"></div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="disclaimer">
+                <h3>⚠️ AVISO DO ORÁCULO - LEIA AS RUNAS ⚠️</h3>
+                <p><strong>ESTA É UMA PARÓDIA MÍSTICA/SATÍRICA!</strong></p>
+                <p>O "Croebet" NÃO é um cassino místico real. Nenhum cigarro mágico ou dinheiro real está envolvido.</p>
+                <p>Roleta e caça-níquel de verdade são desenhados matematicamente para você perder. Aqui o saldo é falso; lá o prejuízo é real.</p>
+                <p>🔮 As cartas revelam: A casa sempre ganha. O capitalismo é mais forte que qualquer feitiço.</p>
+                <p>❌ NÃO apostamos em bets. ❌ NÃO incentivamos jogos de azar. ✅ Incentivamos consciência de classe (e talvez um cigarro para relaxar).</p>
+                <p class="help-link">🆘 Se você ou alguém próximo tem problemas com jogos de azar, procure ajuda: <a href="https://www.jogadoresanonimos.com.br/" target="_blank">Jogadores Anônimos</a></p>
+            </div>
+            <div class="footer-credits">
+                <p>Uma paródia mística criada a partir das piadas do chat da Croezinha 💜</p>
+                <p>Feito com 💻, ☕ e 💨 | O Krepe não ficou triste na produção deste site</p>
+                <p class="small-disclaimer">"A gente só soltou o aplicativo piloto"</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script type="module" src="./caca-niqueis.js"></script>
+</body>
+</html>

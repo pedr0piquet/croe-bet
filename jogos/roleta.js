@@ -1,4 +1,4 @@
-import { saldo, updateBalance, onBalanceChange, formatBRL, pick, sleep, showMessage, checkBroke, createBetControl } from './jogos.js';
+import { MODO_STREAMER, saldo, updateBalance, onBalanceChange, formatBRL, pick, sleep, showMessage, checkBroke, createBetControl } from './jogos.js';
 
 // ======================================================
 // 🌙 ROLETA DA LUA CHEIA TRABALHISTA
@@ -184,6 +184,15 @@ const roleta = (() => {
     // Retorno total (aposta + lucro)
     const multiplicador = (key) => (key.startsWith('n:') ? 36 : /^[dc]\d$/.test(key) ? 3 : 2);
 
+    // Modo streamer: a "sorte" escolhe o número que mais paga para as fichas da mesa
+    function indiceMaisLucrativo() {
+        const premios = ORDEM.map((n) => Object.entries(bets)
+            .reduce((s, [key, value]) => s + (ganha(key, n) ? value * multiplicador(key) : 0), 0));
+        const melhor = Math.max(...premios);
+        const candidatos = premios.map((p, i) => (p === melhor ? i : -1)).filter((i) => i >= 0);
+        return pick(candidatos);
+    }
+
     // ---------- Giro ----------
     async function spin() {
         if (isSpinning || totalBet() === 0) return;
@@ -192,7 +201,7 @@ const roleta = (() => {
         showMessage(message, '🌙 A lua está girando... acenda um cigarro e aguarde 💨');
         Object.values(cells).forEach((el) => el.classList.remove('hit'));
 
-        const index = Math.floor(Math.random() * ORDEM.length);
+        const index = MODO_STREAMER ? indiceMaisLucrativo() : Math.floor(Math.random() * ORDEM.length);
         const numero = ORDEM[index];
 
         // Leva o setor sorteado até o ponteiro (topo), com várias voltas

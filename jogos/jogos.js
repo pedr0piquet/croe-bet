@@ -5,7 +5,13 @@
 // ======================================================
 
 export const SALDO_INICIAL = 1000;
-const CHAVE_SALDO = 'croebet-saldo';
+
+// Modo streamer: as páginas em /streamer/ têm <html data-modo="streamer">.
+// Igual às "contas demo" de influenciador de bet: o jogo é o mesmo, mas a casa deixa ganhar.
+export const MODO_STREAMER = document.documentElement.dataset.modo === 'streamer';
+
+// Saldo separado para o streamer não inflar o saldo das páginas normais
+const CHAVE_SALDO = MODO_STREAMER ? 'croebet-saldo-streamer' : 'croebet-saldo';
 
 function lerSaldo() {
     try {
