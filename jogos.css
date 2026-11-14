@@ -1,0 +1,555 @@
+/* Estilos extras da Roleta e do Caça-Níqueis.
+   A base (cores, cards, botões, mensagens) vem de styles.css */
+
+.logo-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.back-link a {
+    color: #FF69B4;
+    font-weight: bold;
+}
+
+.hero-compact {
+    padding: 20px;
+}
+
+/* Cards do hub que levam a um jogo pronto */
+a.game-card.playable {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a.game-card.playable small {
+    color: #dda0dd;
+    font-style: italic;
+}
+
+.play-badge {
+    align-self: flex-start;
+    margin-top: auto;
+    background: linear-gradient(45deg, #FF69B4, #ff85c1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    border: 1px solid #dda0dd;
+    animation: pulse 2s infinite;
+}
+
+/* Ambos os cards são interativos: sem "pulo" no hover */
+.game-card.featured:hover {
+    transform: none;
+}
+
+/* Input de aposta (o styles.css estiliza apenas #betAmount) */
+.bet-amount-input {
+    width: 120px;
+    padding: 10px;
+    font-size: 1.2em;
+    text-align: center;
+    border: 2px solid #FF69B4;
+    border-radius: 10px;
+    background: rgba(42, 10, 42, 0.9);
+    color: #FF69B4;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+}
+
+.bet-controls label {
+    text-align: center;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 1em;
+    background: rgba(42, 10, 42, 0.9);
+    color: #f0e6f0;
+    border: 2px solid #dda0dd;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-small:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+}
+
+.btn-small:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ================= ROLETA ================= */
+
+.roulette-layout {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.wheel-area {
+    position: relative;
+    width: min(340px, 80vw);
+    aspect-ratio: 1;
+    padding: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6b2d9e 0%, #8b1fa8 100%);
+    border: 3px solid #FF69B4;
+    box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transform: rotate(0deg);
+}
+
+.wheel text {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    fill: #fff;
+    user-select: none;
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 26px solid #FF69B4;
+    filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.9));
+    z-index: 2;
+}
+
+.roulette-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 200px;
+}
+
+.roulette-last {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.roulette-last-label,
+.roulette-history-label {
+    color: #dda0dd;
+    font-style: italic;
+}
+
+.roulette-last-number {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 2.4em;
+    font-weight: 700;
+    border: 3px solid #FF69B4;
+    background: rgba(42, 10, 42, 0.9);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+}
+
+.roulette-history {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    max-width: 260px;
+    min-height: 34px;
+}
+
+.hist-ball {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9em;
+    border: 1px solid #dda0dd;
+}
+
+.cor-vermelho { background: #c2185b; color: #fff; }
+.cor-preto    { background: #1a0520; color: #fff; }
+.cor-verde    { background: #2e7d32; color: #fff; }
+
+/* Mesa de apostas */
+.roulette-table-wrap {
+    overflow-x: auto;
+    margin-bottom: 15px;
+    padding-bottom: 4px;
+}
+
+.roulette-table {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(12, 1fr) 1.2fr;
+    grid-auto-rows: minmax(42px, auto);
+    gap: 4px;
+    min-width: 520px;
+    padding: 12px;
+    background: linear-gradient(135deg, #2b0b36 0%, #3d0f4a 100%);
+    border: 3px solid #FF69B4;
+    border-radius: 15px;
+}
+
+.bet-cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(221, 160, 221, 0.6);
+    border-radius: 6px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.95em;
+    color: #fff;
+    background: rgba(42, 10, 42, 0.9);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    padding: 4px;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.bet-cell:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 12px rgba(255, 105, 180, 0.8);
+    z-index: 1;
+}
+
+.bet-cell.cor-vermelho { background: #c2185b; }
+.bet-cell.cor-preto    { background: #1a0520; }
+.bet-cell.cor-verde    { background: #2e7d32; }
+
+.bet-cell.hit {
+    animation: win-shake 0.5s;
+    box-shadow: 0 0 20px #FF69B4, inset 0 0 10px #fff;
+    border-color: #fff;
+}
+
+.chip {
+    position: absolute;
+    top: -8px;
+    right: -6px;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 5px;
+    border-radius: 13px;
+    background: radial-gradient(circle, #ffd700 0%, #e6a800 100%);
+    color: #2a0a2a;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.roulette-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+/* ================= CAÇA-NÍQUEIS 3x3 ================= */
+
+.slot-grid {
+    gap: 12px;
+}
+
+.reel-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.slot-cell {
+    width: 110px;
+    height: 110px;
+    background: rgba(42, 10, 42, 0.9);
+    border: 3px solid #FF69B4;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.6em;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.reel-col.spinning .slot-cell .symbol {
+    animation: blur-spin 0.5s linear infinite;
+}
+
+.slot-cell.win {
+    animation: win-shake 0.5s;
+    border-color: #ffd700;
+    box-shadow: 0 0 30px #FF69B4, inset 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.paytable-row .arcano-nome {
+    color: #dda0dd;
+    font-style: italic;
+}
+
+/* ================= BOLA DE CRISTAL ================= */
+
+.crystal-layout {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.crystal-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.crystal-ball {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 22%),
+        radial-gradient(circle at 50% 55%, #b05cd6 0%, #6b2d9e 45%, #2a0a2a 100%);
+    border: 3px solid #FF69B4;
+    box-shadow:
+        0 0 35px rgba(255, 105, 180, 0.6),
+        inset 0 -15px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.4s, filter 0.4s;
+    z-index: 1;
+}
+
+.crystal-smoke {
+    position: absolute;
+    inset: -30%;
+    background:
+        radial-gradient(ellipse at 30% 60%, rgba(221, 160, 221, 0.35) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 40%, rgba(255, 105, 180, 0.25) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 80%, rgba(240, 230, 240, 0.2) 0%, transparent 40%);
+    animation: smoke-swirl 9s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes smoke-swirl {
+    from { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.15); }
+    to { transform: rotate(360deg) scale(1); }
+}
+
+.crystal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.crystal-label {
+    color: #f0e6f0;
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+.crystal-mult {
+    font-family: 'Cinzel', serif;
+    font-size: 2.6em;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 105, 180, 1), 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.crystal-next {
+    color: #dda0dd;
+    font-size: 0.9em;
+}
+
+.crystal-base {
+    width: 150px;
+    height: 34px;
+    margin-top: -14px;
+    background: linear-gradient(180deg, #8b1fa8 0%, #3d0f4a 100%);
+    border: 3px solid #FF69B4;
+    border-radius: 50% 50% 12px 12px / 60% 60% 12px 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.crystal-ball.ativa {
+    box-shadow: 0 0 50px rgba(255, 105, 180, 0.9), inset 0 -15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.crystal-ball.ativa .crystal-smoke {
+    animation-duration: 3s;
+}
+
+.crystal-ball.perdeu {
+    filter: grayscale(0.8) brightness(0.7);
+    animation: win-shake 0.5s;
+}
+
+.crystal-ball.ganhou {
+    animation: win-shake 0.5s;
+    box-shadow: 0 0 60px #ffd700, inset 0 -15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.crystal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: min(460px, 100%);
+}
+
+.crystal-tile {
+    position: relative;
+    aspect-ratio: 1;
+    border: 2px solid #FF69B4;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6b2d9e 0%, #3d0f4a 100%);
+    color: #f0e6f0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 0.85em;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px;
+    text-align: center;
+    cursor: not-allowed;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    overflow: hidden;
+}
+
+.crystal-tile .tile-icon {
+    font-size: 2em;
+    line-height: 1;
+}
+
+.crystal-tile.oculto .tile-icon {
+    animation: blink 2s infinite;
+}
+
+.crystal-tile.jogavel {
+    cursor: pointer;
+}
+
+.crystal-tile.jogavel:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 18px rgba(255, 105, 180, 0.8);
+}
+
+.crystal-tile.mantido {
+    background: linear-gradient(135deg, #2e7d32 0%, #1b4d1e 100%);
+    border-color: #a5d6a7;
+    animation: win-shake 0.4s;
+}
+
+.crystal-tile.reforma {
+    background: linear-gradient(135deg, #c2185b 0%, #5c0a2b 100%);
+    border-color: #fff;
+}
+
+.crystal-tile.reforma.fatal {
+    animation: win-shake 0.5s;
+    box-shadow: 0 0 25px #ff1744;
+}
+
+.crystal-tile.revelado-depois {
+    opacity: 0.55;
+}
+
+.btn-small.ativo {
+    background: linear-gradient(135deg, #FF69B4 0%, #ff85c1 100%);
+    border-color: #fff;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .slot-cell {
+        width: 72px;
+        height: 72px;
+        font-size: 2.3em;
+    }
+
+    .slot-grid {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .roulette-last-number {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8em;
+    }
+
+    .game-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .game-header h3 {
+        font-size: 1.4em;
+    }
+
+    .crystal-ball {
+        width: 170px;
+        height: 170px;
+    }
+
+    .crystal-mult {
+        font-size: 2em;
+    }
+
+    .crystal-tile {
+        font-size: 0.7em;
+    }
+
+    .crystal-tile .tile-icon {
+        font-size: 1.6em;
+    }
+}

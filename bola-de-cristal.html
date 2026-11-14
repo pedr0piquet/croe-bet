@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CROEBET - Bola de Cristal dos Direitos 🔮</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./jogos.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="./" class="logo-link">🔮 CROEBET</a></h1>
+                <span class="tagline">Um cassino bem lofi</span>
+            </div>
+            <div class="balance">
+                <div class="balance-label">Saldo Fictício:</div>
+                <div class="balance-amount" id="balance">R$ 1.000,00</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero hero-compact">
+            <p class="hero-subtitle">"A fumaça nunca mente: reforma sempre vem" 💨</p>
+            <small>💸 O saldo fictício é o mesmo em todos os jogos do Croebet.</small>
+            <p class="back-link"><a href="./">← Voltar ao Salão dos Arcanos</a></p>
+        </section>
+
+        <section class="games">
+            <!-- ================= BOLA DE CRISTAL ================= -->
+            <div class="game-card featured" id="bola">
+                <div class="game-header">
+                    <h3>🔮 BOLA DE CRISTAL DOS DIREITOS</h3>
+                    <span class="hot-badge">✨ NOVO ✨</span>
+                </div>
+                <div class="game-description">
+                    <p>Consulte a bola de cristal fumegante para prever quais direitos trabalhistas você vai perder!</p>
+                    <p class="game-hint">Escolha quantas reformas estão escondidas na fumaça e revele os direitos um a um. Cada direito mantido aumenta o prêmio. Saque antes que a reforma chegue.</p>
+                    <small class="game-joke">💨 A fumaça nunca mente: reforma sempre vem</small>
+                </div>
+
+                <div class="slot-machine">
+                    <div class="crystal-layout">
+                        <div class="crystal-wrap">
+                            <div class="crystal-ball" id="crystalBall">
+                                <div class="crystal-smoke" aria-hidden="true"></div>
+                                <div class="crystal-content">
+                                    <span class="crystal-label" id="crystalLabel">A bola aguarda</span>
+                                    <span class="crystal-mult" id="crystalMult">1,00x</span>
+                                    <span class="crystal-next" id="crystalNext">&nbsp;</span>
+                                </div>
+                            </div>
+                            <div class="crystal-base" aria-hidden="true"></div>
+                        </div>
+
+                        <div class="crystal-grid" id="crystalGrid"></div>
+                    </div>
+
+                    <div class="bet-controls">
+                        <label>Reformas escondidas na fumaça:</label>
+                        <div class="bet-input-group" id="reformaOptions"></div>
+                    </div>
+
+                    <div class="bet-controls">
+                        <label for="bolaBet">Valor da Aposta:</label>
+                        <div class="bet-input-group">
+                            <button class="btn-bet-adjust" id="bolaDecrease">-</button>
+                            <input type="number" class="bet-amount-input" id="bolaBet" value="10" min="1" max="1000" step="10">
+                            <button class="btn-bet-adjust" id="bolaIncrease">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-spin" id="bolaBtn">
+                        <span class="btn-text" id="bolaBtnText">CONSULTAR A BOLA</span>
+                        <span class="btn-price">R$ <span id="bolaPrice">10,00</span></span>
+                    </button>
+
+                    <div class="result-message" id="bolaMessage"></div>
+                </div>
+
+                <div class="paytable">
+                    <h4>🔮 Como a Bola Paga</h4>
+                    <div class="paytable-row"><span>✅ Direito mantido</span><span class="prize">prêmio sobe</span></div>
+                    <div class="paytable-row"><span>💨 Reforma trabalhista</span><span class="prize">perde a aposta</span></div>
+                    <div class="paytable-row"><span>Mais reformas na fumaça</span><span class="prize">prêmios maiores</span></div>
+                    <div class="paytable-row"><span>Sacar a qualquer momento</span><span class="prize">aposta × multiplicador</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="disclaimer">
+                <h3>⚠️ AVISO DO ORÁCULO - LEIA AS RUNAS ⚠️</h3>
+                <p><strong>ESTA É UMA PARÓDIA MÍSTICA/SATÍRICA!</strong></p>
+                <p>O "Croebet" NÃO é um cassino místico real. Nenhum cigarro mágico ou dinheiro real está envolvido.</p>
+                <p>Roleta e caça-níquel de verdade são desenhados matematicamente para você perder. Aqui o saldo é falso; lá o prejuízo é real.</p>
+                <p>🔮 As cartas revelam: A casa sempre ganha. O capitalismo é mais forte que qualquer feitiço.</p>
+                <p>❌ NÃO apostamos em bets. ❌ NÃO incentivamos jogos de azar. ✅ Incentivamos consciência de classe (e talvez um cigarro para relaxar).</p>
+                <p class="help-link">🆘 Se você ou alguém próximo tem problemas com jogos de azar, procure ajuda: <a href="https://www.jogadoresanonimos.com.br/" target="_blank">Jogadores Anônimos</a></p>
+            </div>
+            <div class="footer-credits">
+                <p>Uma paródia mística criada a partir das piadas do chat da Croezinha 💜</p>
+                <p>Feito com 💻, ☕ e 💨 | O Krepe não ficou triste na produção deste site</p>
+                <p class="small-disclaimer">"A gente só soltou o aplicativo piloto"</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script type="module" src="./bola-de-cristal.js"></script>
+</body>
+</html>
